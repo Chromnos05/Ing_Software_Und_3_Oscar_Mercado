@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    build.xml - Sistema de Nómina
+    Herramienta de build: Apache Ant
+    Targets disponibles: clean, compile, run, test, jar, javadoc
+-->
+<project name="SistemaNomina" default="compile" basedir=".">
+
+    <description>Sistema de Nómina - Proyecto OOP con Ant</description>
+
+    <!-- ==================== Propiedades del proyecto ==================== -->
+    <property name="src.dir"          value="src"/>
+    <property name="test.dir"         value="test"/>
+    <property name="lib.dir"          value="lib"/>
+    <property name="build.dir"        value="build"/>
+    <property name="build.classes"    value="${build.dir}/classes"/>
+    <property name="build.test"       value="${build.dir}/test-classes"/>
+    <property name="dist.dir"         value="dist"/>
+    <property name="dist.jar"         value="${dist.dir}/SistemaNomina.jar"/>
+    <property name="javadoc.dir"      value="${dist.dir}/javadoc"/>
+    <property name="test.reports.dir" value="${build.dir}/test-reports"/>
+    <property name="main.class"       value="com.nomina.Main"/>
+    <property name="source.version"   value="11"/>
+    <property name="target.version"   value="11"/>
+
+    <!-- ==================== Classpath de compilación ==================== -->
+    <path id="compile.classpath">
+        <fileset dir="${lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+    </path>
+
+    <!-- Classpath para tests (incluye clases compiladas + JUnit) -->
+    <path id="test.classpath">
+        <path refid="compile.classpath"/>
+        <pathelement location="${build.classes}"/>
+        <pathelement location="${build.test}"/>
+    </path>
+
+    <!-- ==================== TARGET: init ==================== -->
+    <target name="init" description="Crea los directorios de salida necesarios">
+        <mkdir dir="${build.classes}"/>
+        <mkdir dir="${build.test}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${javadoc.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
+        <echo message="=== Sistema Nómina - Build iniciado ==="/>
+    </target>
+
+    <!-- ==================== TARGET: clean ==================== -->
+    <target name="clean" description="Elimina todos los artefactos generados">
+        <delete dir="${build.dir}" quiet="true"/>
+        <delete dir="${dist.dir}"  quiet="true"/>
+        <echo message="=== Limpieza completada ==="/>
+    </target>
+
+    <!-- ==================== TARGET: compile ==================== -->
+    <target name="compile" depends="init" description="Compila las fuentes del proyecto">
+        <javac
+            srcdir="${src.dir}"
+            destdir="${build.classes}"
+            source="${source.version}"
+            target="${target.version}"
+            encoding="UTF-8"
+            includeantruntime="false"
+            debug="true"
+            debuglevel="lines,vars,source">
+            <classpath refid="compile.classpath"/>
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+        <echo message="=== Compilación exitosa ==="/>
+    </target>
+
+    <!-- ==================== TARGET: compile-tests ==================== -->
+    <target name="compile-tests" depends="compile"
+            description="Compila las clases de prueba">
+        <javac
+            srcdir="${test.dir}"
+            destdir="${build.test}"
+            source="${source.version}"
+            target="${target.version}"
+            encoding="UTF-8"
+            includeantruntime="false"
+            debug="true">
+            <classpath refid="test.classpath"/>
+        </javac>
+        <echo message="=== Tests compilados ==="/>
+    </target>
+
+    <!-- ==================== TARGET: jar ==================== -->
+    <target name="jar" depends="compile" description="Empaqueta el proyecto en un JAR">
+        <jar destfile="${dist.jar}" basedir="${build.classes}">
+            <manifest>
+                <attribute name="Main-Class"       value="${main.class}"/>
+                <attribute name="Implementation-Title"   value="Sistema Nómina"/>
+                <attribute name="Implementation-Version" value="1.0"/>
+                <attribute name="Built-By"         value="${user.name}"/>
+            </manifest>
+        </jar>
+        <echo message="=== JAR generado en: ${dist.jar} ==="/>
+    </target>
+
+    <!-- ==================== TARGET: run ==================== -->
+    <target name="run" depends="compile" description="Ejecuta la clase principal">
+        <java classname="${main.class}" fork="true">
+            <classpath>
+                <path refid="compile.classpath"/>
+                <pathelement location="${build.classes}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- ==================== TARGET: test ==================== -->
+    <target name="test" depends="compile-tests"
+            description="Ejecuta los tests (JUnit si está en lib/)">
+        <junit printsummary="yes" haltonfailure="no" fork="true">
+            <classpath refid="test.classpath"/>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <batchtest todir="${test.reports.dir}">
+                <fileset dir="${build.test}" includes="**/*Test.class"/>
+            </batchtest>
+        </junit>
+        <junitreport todir="${test.reports.dir}">
+            <fileset dir="${test.reports.dir}" includes="TEST-*.xml"/>
+            <report format="noframes" todir="${test.reports.dir}/html"/>
+        </junitreport>
+        <echo message="=== Tests finalizados. Reportes en: ${test.reports.dir} ==="/>
+    </target>
+
+    <!-- ==================== TARGET: javadoc ==================== -->
+    <target name="javadoc" depends="compile"
+            description="Genera la documentación Javadoc">
+        <javadoc
+            sourcepath="${src.dir}"
+            destdir="${javadoc.dir}"
+            packagenames="com.nomina.*"
+            author="true"
+            version="true"
+            use="true"
+            windowtitle="Sistema Nómina - API"
+            encoding="UTF-8"
+            docencoding="UTF-8"
+            charset="UTF-8">
+            <classpath refid="compile.classpath"/>
+            <doctitle><![CDATA[<h1>Sistema de Nómina</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Sistema de Nómina OOP &copy; 2025</i>]]></bottom>
+        </javadoc>
+        <echo message="=== Javadoc generado en: ${javadoc.dir} ==="/>
+    </target>
+
+    <!-- ==================== TARGET: all ==================== -->
+    <target name="all" depends="clean, compile, test, jar, javadoc"
+            description="Ejecuta todo el ciclo: clean → compile → test → jar → javadoc"/>
+
+</project>

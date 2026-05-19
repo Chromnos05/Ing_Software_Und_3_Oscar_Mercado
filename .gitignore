@@ -1,0 +1,25 @@
+# Directorios generados por Ant
+build/
+dist/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+*.nbattrs
+
+# IntelliJ / Eclipse
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Archivos compilados
+*.class
+
+# JAR generados localmente
+*.jar
+
+# Logs
+*.log
