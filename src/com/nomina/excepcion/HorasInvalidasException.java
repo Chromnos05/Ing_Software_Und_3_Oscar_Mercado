@@ -1,24 +1,24 @@
 package com.nomina.excepcion;
 
 /**
- * Excepción lanzada cuando se intenta registrar o calcular con una cantidad
- * de horas trabajadas inválida.
+ * Excepcion lanzada cuando se intenta registrar o calcular con una cantidad
+ * de horas trabajadas invalida.
  *
- * <p>Son inválidas las horas que sean negativas o que superen el máximo legal
- * permitido (e.g., más de 24 horas en un día o más de 168 en una semana).</p>
+ * <p>Son invalidas las horas que sean negativas o que superen el maximo legal
+ * permitido (e.g., mas de 24 horas en un dia o mas de 168 en una semana).</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  */
 public class HorasInvalidasException extends Exception {
 
-    /** Identificador de versión de serialización. */
+    /** Identificador de version de serializacion. */
     private static final long serialVersionUID = 1L;
 
-    /** Cantidad de horas que provocó la excepción. */
+    /** Cantidad de horas que provoco la excepcion. */
     private final double horasIngresadas;
 
-    /** Límite máximo de horas permitido. */
+    /** Limite maximo de horas permitido. */
     private final double horasMaximas;
 
     // ── Constructores ──────────────────────────────────────────────────────
@@ -26,7 +26,7 @@ public class HorasInvalidasException extends Exception {
     /**
      * Constructor con mensaje descriptivo.
      *
-     * @param mensaje descripción del error
+     * @param mensaje descripcion del error
      */
     public HorasInvalidasException(String mensaje) {
         super(mensaje);
@@ -35,26 +35,26 @@ public class HorasInvalidasException extends Exception {
     }
 
     /**
-     * Constructor con mensaje y valor de horas que originó el error.
+     * Constructor con mensaje y valor de horas que origino el error.
      *
-     * @param mensaje         descripción del error
-     * @param horasIngresadas número de horas que se intentó registrar
-     * @param horasMaximas    límite máximo permitido
+     * @param mensaje         descripcion del error
+     * @param horasIngresadas numero de horas que se intento registrar
+     * @param horasMaximas    limite maximo permitido
      */
     public HorasInvalidasException(String mensaje,
                                    double horasIngresadas,
                                    double horasMaximas) {
-        super(String.format("%s [Horas ingresadas: %.2f | Máximo permitido: %.2f]",
+        super(String.format("%s [Horas ingresadas: %.2f | Maximo permitido: %.2f]",
                 mensaje, horasIngresadas, horasMaximas));
         this.horasIngresadas = horasIngresadas;
         this.horasMaximas    = horasMaximas;
     }
 
     /**
-     * Constructor con causa raíz.
+     * Constructor con causa raiz.
      *
-     * @param mensaje descripción del error
-     * @param causa   excepción que originó este error
+     * @param mensaje descripcion del error
+     * @param causa   excepcion que origino este error
      */
     public HorasInvalidasException(String mensaje, Throwable causa) {
         super(mensaje, causa);
@@ -74,11 +74,12 @@ public class HorasInvalidasException extends Exception {
     }
 
     /**
-     * Retorna el límite máximo de horas permitido.
+     * Retorna el limite maximo de horas permitido.
      *
-     * @return horas máximas
+     * @return horas maximas
      */
     public double getHorasMaximas() {
         return horasMaximas;
     }
 }
+

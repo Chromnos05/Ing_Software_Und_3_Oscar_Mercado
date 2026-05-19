@@ -1,21 +1,21 @@
 package com.nomina.excepcion;
 
 /**
- * Excepción lanzada cuando se intenta registrar o calcular con un monto
- * de ventas inválido.
+ * Excepcion lanzada cuando se intenta registrar o calcular con un monto
+ * de ventas invalido.
  *
- * <p>Un monto de ventas es inválido si es negativo o si supera algún límite
- * de negocio definido (e.g., tope máximo de ventas reportables).</p>
+ * <p>Un monto de ventas es invalido si es negativo o si supera algun limite
+ * de negocio definido (e.g., tope maximo de ventas reportables).</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  */
 public class VentasInvalidasException extends Exception {
 
-    /** Identificador de versión de serialización. */
+    /** Identificador de version de serializacion. */
     private static final long serialVersionUID = 1L;
 
-    /** Monto de ventas que provocó la excepción. */
+    /** Monto de ventas que provoco la excepcion. */
     private final double montoVentas;
 
     // ── Constructores ──────────────────────────────────────────────────────
@@ -23,7 +23,7 @@ public class VentasInvalidasException extends Exception {
     /**
      * Constructor con mensaje descriptivo.
      *
-     * @param mensaje descripción del error
+     * @param mensaje descripcion del error
      */
     public VentasInvalidasException(String mensaje) {
         super(mensaje);
@@ -31,10 +31,10 @@ public class VentasInvalidasException extends Exception {
     }
 
     /**
-     * Constructor con mensaje y monto de ventas que originó el error.
+     * Constructor con mensaje y monto de ventas que origino el error.
      *
-     * @param mensaje     descripción del error
-     * @param montoVentas monto de ventas que se intentó registrar
+     * @param mensaje     descripcion del error
+     * @param montoVentas monto de ventas que se intento registrar
      */
     public VentasInvalidasException(String mensaje, double montoVentas) {
         super(String.format("%s [Monto de ventas: %.2f]", mensaje, montoVentas));
@@ -42,10 +42,10 @@ public class VentasInvalidasException extends Exception {
     }
 
     /**
-     * Constructor con causa raíz.
+     * Constructor con causa raiz.
      *
-     * @param mensaje descripción del error
-     * @param causa   excepción que originó este error
+     * @param mensaje descripcion del error
+     * @param causa   excepcion que origino este error
      */
     public VentasInvalidasException(String mensaje, Throwable causa) {
         super(mensaje, causa);
@@ -55,7 +55,7 @@ public class VentasInvalidasException extends Exception {
     // ── Getter ─────────────────────────────────────────────────────────────
 
     /**
-     * Retorna el monto de ventas que desencadenó la excepción.
+     * Retorna el monto de ventas que desencadeno la excepcion.
      *
      * @return monto de ventas ingresado
      */
@@ -63,3 +63,4 @@ public class VentasInvalidasException extends Exception {
         return montoVentas;
     }
 }
+

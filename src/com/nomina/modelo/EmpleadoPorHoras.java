@@ -7,14 +7,14 @@ import java.time.LocalDate;
 /**
  * Representa a un empleado remunerado por horas trabajadas.
  *
- * <p>El salario bruto se calcula multiplicando las horas trabajadas en el período
+ * <p>El salario bruto se calcula multiplicando las horas trabajadas en el periodo
  * por la tarifa pactada por hora. Las horas extras (superiores a la jornada
- * estándar) se pagan con un recargo adicional.</p>
+ * estandar) se pagan con un recargo adicional.</p>
  *
- * <p>Principio SRP: esta clase es responsable únicamente de modelar
- * la lógica salarial del empleado contratado por horas.</p>
+ * <p>Principio SRP: esta clase es responsable unicamente de modelar
+ * la logica salarial del empleado contratado por horas.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  * @see Empleado
  * @see HorasInvalidasException
@@ -23,7 +23,7 @@ public class EmpleadoPorHoras extends Empleado {
 
     // ── Constantes ─────────────────────────────────────────────────────────
 
-    /** Máximo de horas trabajables en un período mensual (4 semanas × 48 h). */
+    /** Maximo de horas trabajables en un periodo mensual (4 semanas × 48 h). */
     public static final double HORAS_MAXIMAS_MENSUAL    = 192.0;
 
     /** Horas que conforman la jornada ordinaria mensual. */
@@ -35,10 +35,10 @@ public class EmpleadoPorHoras extends Empleado {
     /** Porcentaje de aporte a salud (4 %). */
     private static final double PORCENTAJE_SALUD        = 0.04;
 
-    /** Porcentaje de aporte a pensión (4 %). */
+    /** Porcentaje de aporte a pension (4 %). */
     private static final double PORCENTAJE_PENSION      = 0.04;
 
-    /** Bonificación fija por auxiliar de transporte si aplica. */
+    /** Bonificacion fija por auxiliar de transporte si aplica. */
     private static final double AUXILIO_TRANSPORTE      = 117172.0;
 
     /** Umbral salarial para recibir auxilio de transporte (2 × SMMLV aprox.). */
@@ -49,7 +49,7 @@ public class EmpleadoPorHoras extends Empleado {
     /** Tarifa de pago por cada hora ordinaria trabajada (valor ≥ 0). */
     private double tarifaPorHora;
 
-    /** Horas trabajadas en el período actual (0 ≤ valor ≤ HORAS_MAXIMAS_MENSUAL). */
+    /** Horas trabajadas en el periodo actual (0 ≤ valor ≤ HORAS_MAXIMAS_MENSUAL). */
     private double horasTrabajadas;
 
     // ── Constructor ────────────────────────────────────────────────────────
@@ -57,13 +57,13 @@ public class EmpleadoPorHoras extends Empleado {
     /**
      * Construye un empleado por horas.
      *
-     * @param id              identificador único
+     * @param id              identificador unico
      * @param nombre          nombre completo
      * @param fechaIngreso    fecha de ingreso a la empresa
      * @param tarifaPorHora   tarifa por hora ordinaria (≥ 0)
-     * @param horasTrabajadas horas trabajadas en el período (0 a 192)
+     * @param horasTrabajadas horas trabajadas en el periodo (0 a 192)
      * @throws IllegalArgumentException si tarifaPorHora es negativa
-     * @throws HorasInvalidasException  si horasTrabajadas está fuera del rango válido
+     * @throws HorasInvalidasException  si horasTrabajadas esta fuera del rango valido
      */
     public EmpleadoPorHoras(String id,
                             String nombre,
@@ -75,15 +75,15 @@ public class EmpleadoPorHoras extends Empleado {
         setHorasTrabajadas(horasTrabajadas);
     }
 
-    // ── Implementación de métodos abstractos ───────────────────────────────
+    // ── Implementacion de metodos abstractos ───────────────────────────────
 
     /**
      * {@inheritDoc}
      *
      * <p>Calcula: horas ordinarias × tarifa + horas extras × (tarifa × factor extra).</p>
      *
-     * @return salario bruto calculado según horas trabajadas
-     * @throws SalarioNegativoException si el resultado es negativo (no debería ocurrir)
+     * @return salario bruto calculado segun horas trabajadas
+     * @throws SalarioNegativoException si el resultado es negativo (no deberia ocurrir)
      */
     @Override
     public double calcularSalarioBruto() throws SalarioNegativoException {
@@ -122,7 +122,7 @@ public class EmpleadoPorHoras extends Empleado {
     /**
      * {@inheritDoc}
      *
-     * <p>Deducciones: aporte a salud + pensión sobre el salario bruto.</p>
+     * <p>Deducciones: aporte a salud + pension sobre el salario bruto.</p>
      *
      * @return total de deducciones de seguridad social
      */
@@ -135,7 +135,7 @@ public class EmpleadoPorHoras extends Empleado {
         }
     }
 
-    // ── Getters y Setters con validación ───────────────────────────────────
+    // ── Getters y Setters con validacion ───────────────────────────────────
 
     /**
      * Retorna la tarifa de pago por hora ordinaria.
@@ -161,7 +161,7 @@ public class EmpleadoPorHoras extends Empleado {
     }
 
     /**
-     * Retorna las horas trabajadas en el período actual.
+     * Retorna las horas trabajadas en el periodo actual.
      *
      * @return horas trabajadas
      */
@@ -170,16 +170,16 @@ public class EmpleadoPorHoras extends Empleado {
     }
 
     /**
-     * Establece las horas trabajadas en el período.
+     * Establece las horas trabajadas en el periodo.
      *
      * @param horasTrabajadas horas trabajadas (0 ≤ valor ≤ {@value #HORAS_MAXIMAS_MENSUAL})
-     * @throws HorasInvalidasException si el valor está fuera del rango válido
+     * @throws HorasInvalidasException si el valor esta fuera del rango valido
      */
     public final void setHorasTrabajadas(double horasTrabajadas)
             throws HorasInvalidasException {
         if (horasTrabajadas < 0 || horasTrabajadas > HORAS_MAXIMAS_MENSUAL) {
             throw new HorasInvalidasException(
-                    "Horas inválidas para empleado: " + getNombre(),
+                    "Horas invalidas para empleado: " + getNombre(),
                     horasTrabajadas,
                     HORAS_MAXIMAS_MENSUAL);
         }
@@ -187,9 +187,9 @@ public class EmpleadoPorHoras extends Empleado {
     }
 
     /**
-     * Representación textual del empleado por horas.
+     * Representacion textual del empleado por horas.
      *
-     * @return cadena con datos básicos, tarifa y horas trabajadas
+     * @return cadena con datos basicos, tarifa y horas trabajadas
      */
     @Override
     public String toString() {
@@ -198,3 +198,4 @@ public class EmpleadoPorHoras extends Empleado {
                 tarifaPorHora, horasTrabajadas);
     }
 }
+

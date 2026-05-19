@@ -10,10 +10,10 @@ import java.time.LocalDate;
  * Los beneficios incluyen prima de servicios y los aportes a seguridad
  * social conforman las deducciones.</p>
  *
- * <p>Principio SRP: esta clase es responsable únicamente de modelar
- * la lógica salarial del empleado de tipo asalariado.</p>
+ * <p>Principio SRP: esta clase es responsable unicamente de modelar
+ * la logica salarial del empleado de tipo asalariado.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  * @see Empleado
  */
@@ -24,7 +24,7 @@ public class EmpleadoAsalariado extends Empleado {
     /** Porcentaje de aporte a salud sobre el salario bruto (4 %). */
     private static final double PORCENTAJE_SALUD       = 0.04;
 
-    /** Porcentaje de aporte a pensión sobre el salario bruto (4 %). */
+    /** Porcentaje de aporte a pension sobre el salario bruto (4 %). */
     private static final double PORCENTAJE_PENSION      = 0.04;
 
     /** Porcentaje de prima de servicios (8.33 % mensual ≈ 1/12 de un sueldo). */
@@ -40,7 +40,7 @@ public class EmpleadoAsalariado extends Empleado {
     /**
      * Construye un empleado asalariado.
      *
-     * @param id           identificador único
+     * @param id           identificador unico
      * @param nombre       nombre completo
      * @param fechaIngreso fecha de ingreso a la empresa
      * @param salarioBase  salario base mensual (debe ser ≥ 0)
@@ -54,7 +54,7 @@ public class EmpleadoAsalariado extends Empleado {
         setSalarioBase(salarioBase);
     }
 
-    // ── Implementación de métodos abstractos ───────────────────────────────
+    // ── Implementacion de metodos abstractos ───────────────────────────────
 
     /**
      * {@inheritDoc}
@@ -85,7 +85,7 @@ public class EmpleadoAsalariado extends Empleado {
      * {@inheritDoc}
      *
      * <p>Deducciones: aporte a salud ({@value #PORCENTAJE_SALUD})
-     * + aporte a pensión ({@value #PORCENTAJE_PENSION}) sobre el salario base.</p>
+     * + aporte a pension ({@value #PORCENTAJE_PENSION}) sobre el salario base.</p>
      *
      * @return total de deducciones
      */
@@ -94,7 +94,7 @@ public class EmpleadoAsalariado extends Empleado {
         return salarioBase * (PORCENTAJE_SALUD + PORCENTAJE_PENSION);
     }
 
-    // ── Getter y Setter con validación ─────────────────────────────────────
+    // ── Getter y Setter con validacion ─────────────────────────────────────
 
     /**
      * Retorna el salario base mensual.
@@ -120,7 +120,7 @@ public class EmpleadoAsalariado extends Empleado {
     }
 
     /**
-     * Representación textual del empleado asalariado.
+     * Representacion textual del empleado asalariado.
      *
      * @return cadena con datos del empleado y su salario base
      */
@@ -129,3 +129,4 @@ public class EmpleadoAsalariado extends Empleado {
         return super.toString() + String.format(", salarioBase=%.2f", salarioBase);
     }
 }
+

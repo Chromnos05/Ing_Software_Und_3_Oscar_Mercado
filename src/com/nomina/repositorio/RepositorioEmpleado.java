@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Contrato que define las operaciones CRUD básicas para el repositorio de empleados.
+ * Contrato que define las operaciones CRUD basicas para el repositorio de empleados.
  *
- * <p>Cualquier implementación de este repositorio (en memoria, base de datos,
+ * <p>Cualquier implementacion de este repositorio (en memoria, base de datos,
  * archivo, etc.) debe satisfacer esta interfaz, lo que permite intercambiar
- * la fuente de datos sin modificar las capas superiores (servicio, presentación).</p>
+ * la fuente de datos sin modificar las capas superiores (servicio, presentacion).</p>
  *
- * <p>Principio SRP: esta interfaz es responsable únicamente de definir
+ * <p>Principio SRP: esta interfaz es responsable unicamente de definir
  * el contrato de acceso a datos de empleados.</p>
  *
  * @param <T> tipo concreto de {@link Empleado} que gestiona el repositorio
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  */
 public interface RepositorioEmpleado<T extends Empleado> {
@@ -23,7 +23,7 @@ public interface RepositorioEmpleado<T extends Empleado> {
     /**
      * Guarda un empleado en el repositorio.
      *
-     * <p>Si el empleado ya existe (mismo id), su información es actualizada.</p>
+     * <p>Si el empleado ya existe (mismo id), su informacion es actualizada.</p>
      *
      * @param empleado empleado a guardar (no nulo)
      * @throws IllegalArgumentException si el empleado es nulo
@@ -31,10 +31,10 @@ public interface RepositorioEmpleado<T extends Empleado> {
     void guardar(T empleado);
 
     /**
-     * Busca un empleado por su identificador único.
+     * Busca un empleado por su identificador unico.
      *
      * @param id identificador del empleado
-     * @return {@link Optional} con el empleado encontrado, o vacío si no existe
+     * @return {@link Optional} con el empleado encontrado, o vacio si no existe
      */
     Optional<T> buscarPorId(String id);
 
@@ -49,8 +49,8 @@ public interface RepositorioEmpleado<T extends Empleado> {
      * Elimina el empleado con el id indicado del repositorio.
      *
      * @param id identificador del empleado a eliminar
-     * @return {@code true} si el empleado existía y fue eliminado,
-     *         {@code false} si no se encontró
+     * @return {@code true} si el empleado existia y fue eliminado,
+     *         {@code false} si no se encontro
      */
     boolean eliminar(String id);
 
@@ -63,9 +63,10 @@ public interface RepositorioEmpleado<T extends Empleado> {
     boolean existe(String id);
 
     /**
-     * Retorna el número de empleados almacenados.
+     * Retorna el numero de empleados almacenados.
      *
      * @return cantidad de empleados en el repositorio
      */
     int contarEmpleados();
 }
+

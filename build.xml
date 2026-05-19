@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    build.xml - Sistema de Nómina
+    build.xml - Sistema de Nomina
     Herramienta de build: Apache Ant
     Targets disponibles: clean, compile, run, test, jar, javadoc
 -->
 <project name="SistemaNomina" default="compile" basedir=".">
 
-    <description>Sistema de Nómina - Proyecto OOP con Ant</description>
+    <description>Sistema de Nomina - Proyecto OOP con Ant</description>
 
     <!-- ==================== Propiedades del proyecto ==================== -->
     <property name="src.dir"          value="src"/>
@@ -22,7 +22,7 @@
     <property name="main.class"       value="com.nomina.Main"/>
     <property name="release.version"  value="11"/>
 
-    <!-- ==================== Classpath de compilación ==================== -->
+    <!-- ==================== Classpath de compilacion ==================== -->
     <path id="compile.classpath">
         <fileset dir="${lib.dir}" includes="*.jar" erroronmissingdir="false"/>
     </path>
@@ -41,7 +41,7 @@
         <mkdir dir="${dist.dir}"/>
         <mkdir dir="${javadoc.dir}"/>
         <mkdir dir="${test.reports.dir}"/>
-        <echo message="=== Sistema Nómina - Build iniciado ==="/>
+        <echo message="=== Sistema Nomina - Build iniciado ==="/>
     </target>
 
     <!-- ==================== TARGET: clean ==================== -->
@@ -64,7 +64,7 @@
             <classpath refid="compile.classpath"/>
             <compilerarg value="-Xlint:unchecked"/>
         </javac>
-        <echo message="=== Compilación exitosa ==="/>
+        <echo message="=== Compilacion exitosa ==="/>
     </target>
 
     <!-- ==================== TARGET: compile-tests ==================== -->
@@ -87,7 +87,7 @@
         <jar destfile="${dist.jar}" basedir="${build.classes}">
             <manifest>
                 <attribute name="Main-Class"       value="${main.class}"/>
-                <attribute name="Implementation-Title"   value="Sistema Nómina"/>
+                <attribute name="Implementation-Title"   value="Sistema Nomina"/>
                 <attribute name="Implementation-Version" value="1.0"/>
                 <attribute name="Built-By"         value="${user.name}"/>
             </manifest>
@@ -107,7 +107,7 @@
 
     <!-- ==================== TARGET: test ==================== -->
     <target name="test" depends="compile-tests"
-            description="Ejecuta los tests (JUnit si está en lib/)">
+            description="Ejecuta los tests (JUnit si esta en lib/)">
         <junit printsummary="yes" haltonfailure="no" fork="true">
             <classpath refid="test.classpath"/>
             <formatter type="plain"/>
@@ -125,7 +125,7 @@
 
     <!-- ==================== TARGET: javadoc ==================== -->
     <target name="javadoc" depends="compile"
-            description="Genera la documentación Javadoc">
+            description="Genera la documentacion Javadoc">
         <javadoc
             sourcepath="${src.dir}"
             destdir="${javadoc.dir}"
@@ -133,13 +133,13 @@
             author="true"
             version="true"
             use="true"
-            windowtitle="Sistema Nómina - API"
+            windowtitle="Sistema Nomina - API"
             encoding="UTF-8"
             docencoding="UTF-8"
             charset="UTF-8">
             <classpath refid="compile.classpath"/>
-            <doctitle><![CDATA[<h1>Sistema de Nómina</h1>]]></doctitle>
-            <bottom><![CDATA[<i>Sistema de Nómina OOP &copy; 2025</i>]]></bottom>
+            <doctitle><![CDATA[<h1>Sistema de Nomina</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Sistema de Nomina OOP &copy; 2025</i>]]></bottom>
         </javadoc>
         <echo message="=== Javadoc generado en: ${javadoc.dir} ==="/>
     </target>
@@ -149,3 +149,4 @@
             description="Ejecuta todo el ciclo: clean → compile → test → jar → javadoc"/>
 
 </project>
+

@@ -5,17 +5,17 @@ import com.nomina.excepcion.VentasInvalidasException;
 import java.time.LocalDate;
 
 /**
- * Representa a un empleado cuya remuneración principal proviene de una
- * comisión calculada sobre el monto de ventas realizadas en el período.
+ * Representa a un empleado cuya remuneracion principal proviene de una
+ * comision calculada sobre el monto de ventas realizadas en el periodo.
  *
- * <p>El salario bruto se compone de un salario base fijo más un porcentaje
- * de comisión sobre las ventas totales. A mayor volumen de ventas, mayor
- * remuneración variable.</p>
+ * <p>El salario bruto se compone de un salario base fijo mas un porcentaje
+ * de comision sobre las ventas totales. A mayor volumen de ventas, mayor
+ * remuneracion variable.</p>
  *
- * <p>Principio SRP: esta clase es responsable únicamente de modelar
- * la lógica salarial del empleado por comisión.</p>
+ * <p>Principio SRP: esta clase es responsable unicamente de modelar
+ * la logica salarial del empleado por comision.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  * @see Empleado
  * @see VentasInvalidasException
@@ -27,16 +27,16 @@ public class EmpleadoComision extends Empleado {
     /** Porcentaje de aporte a salud (4 %). */
     private static final double PORCENTAJE_SALUD    = 0.04;
 
-    /** Porcentaje de aporte a pensión (4 %). */
+    /** Porcentaje de aporte a pension (4 %). */
     private static final double PORCENTAJE_PENSION  = 0.04;
 
     /** Bono por cumplimiento de meta de ventas. */
     private static final double BONO_META           = 200_000.0;
 
-    /** Monto de ventas mínimo para recibir el bono de meta. */
+    /** Monto de ventas minimo para recibir el bono de meta. */
     private static final double META_VENTAS         = 10_000_000.0;
 
-    /** Monto máximo de ventas aceptable en un período (límite de negocio). */
+    /** Monto maximo de ventas aceptable en un periodo (limite de negocio). */
     public static final double VENTAS_MAXIMAS       = 500_000_000.0;
 
     // ── Atributos privados ─────────────────────────────────────────────────
@@ -44,25 +44,25 @@ public class EmpleadoComision extends Empleado {
     /** Salario base fijo mensual (≥ 0). */
     private double salarioBase;
 
-    /** Porcentaje de comisión sobre ventas, expresado como decimal (0–1). */
+    /** Porcentaje de comision sobre ventas, expresado como decimal (0–1). */
     private double porcentajeComision;
 
-    /** Monto total de ventas realizadas en el período (0 ≤ valor ≤ VENTAS_MAXIMAS). */
+    /** Monto total de ventas realizadas en el periodo (0 ≤ valor ≤ VENTAS_MAXIMAS). */
     private double totalVentas;
 
     // ── Constructor ────────────────────────────────────────────────────────
 
     /**
-     * Construye un empleado por comisión.
+     * Construye un empleado por comision.
      *
-     * @param id                  identificador único
+     * @param id                  identificador unico
      * @param nombre              nombre completo
      * @param fechaIngreso        fecha de ingreso a la empresa
      * @param salarioBase         salario base fijo (≥ 0)
-     * @param porcentajeComision  porcentaje de comisión, expresado como decimal (e.g. 0.05 = 5 %)
-     * @param totalVentas         monto total de ventas del período (0 a {@value #VENTAS_MAXIMAS})
-     * @throws IllegalArgumentException si salarioBase o porcentajeComision son inválidos
-     * @throws VentasInvalidasException si totalVentas está fuera del rango permitido
+     * @param porcentajeComision  porcentaje de comision, expresado como decimal (e.g. 0.05 = 5 %)
+     * @param totalVentas         monto total de ventas del periodo (0 a {@value #VENTAS_MAXIMAS})
+     * @throws IllegalArgumentException si salarioBase o porcentajeComision son invalidos
+     * @throws VentasInvalidasException si totalVentas esta fuera del rango permitido
      */
     public EmpleadoComision(String id,
                             String nombre,
@@ -76,15 +76,15 @@ public class EmpleadoComision extends Empleado {
         setTotalVentas(totalVentas);
     }
 
-    // ── Implementación de métodos abstractos ───────────────────────────────
+    // ── Implementacion de metodos abstractos ───────────────────────────────
 
     /**
      * {@inheritDoc}
      *
-     * <p>Fórmula: {@code salarioBruto = salarioBase + (totalVentas × porcentajeComision)}</p>
+     * <p>Formula: {@code salarioBruto = salarioBase + (totalVentas × porcentajeComision)}</p>
      *
-     * @return salario bruto calculado con base en ventas y comisión
-     * @throws SalarioNegativoException si el resultado es negativo (no debería ocurrir)
+     * @return salario bruto calculado con base en ventas y comision
+     * @throws SalarioNegativoException si el resultado es negativo (no deberia ocurrir)
      */
     @Override
     public double calcularSalarioBruto() throws SalarioNegativoException {
@@ -113,7 +113,7 @@ public class EmpleadoComision extends Empleado {
     /**
      * {@inheritDoc}
      *
-     * <p>Deducciones: aporte a salud + pensión sobre el salario bruto.</p>
+     * <p>Deducciones: aporte a salud + pension sobre el salario bruto.</p>
      *
      * @return total de deducciones de seguridad social
      */
@@ -126,7 +126,7 @@ public class EmpleadoComision extends Empleado {
         }
     }
 
-    // ── Getters y Setters con validación ───────────────────────────────────
+    // ── Getters y Setters con validacion ───────────────────────────────────
 
     /**
      * Retorna el salario base fijo mensual.
@@ -152,30 +152,30 @@ public class EmpleadoComision extends Empleado {
     }
 
     /**
-     * Retorna el porcentaje de comisión como decimal.
+     * Retorna el porcentaje de comision como decimal.
      *
-     * @return porcentaje de comisión (e.g. 0.05 representa el 5 %)
+     * @return porcentaje de comision (e.g. 0.05 representa el 5 %)
      */
     public double getPorcentajeComision() {
         return porcentajeComision;
     }
 
     /**
-     * Establece el porcentaje de comisión.
+     * Establece el porcentaje de comision.
      *
      * @param porcentajeComision porcentaje en decimal (0 a 1)
-     * @throws IllegalArgumentException si está fuera del rango [0, 1]
+     * @throws IllegalArgumentException si esta fuera del rango [0, 1]
      */
     public final void setPorcentajeComision(double porcentajeComision) {
         if (porcentajeComision < 0 || porcentajeComision > 1) {
             throw new IllegalArgumentException(
-                    "El porcentaje de comisión debe estar entre 0 y 1: " + porcentajeComision);
+                    "El porcentaje de comision debe estar entre 0 y 1: " + porcentajeComision);
         }
         this.porcentajeComision = porcentajeComision;
     }
 
     /**
-     * Retorna el total de ventas del período.
+     * Retorna el total de ventas del periodo.
      *
      * @return total de ventas
      */
@@ -184,23 +184,23 @@ public class EmpleadoComision extends Empleado {
     }
 
     /**
-     * Establece el total de ventas del período.
+     * Establece el total de ventas del periodo.
      *
      * @param totalVentas monto de ventas (0 ≤ valor ≤ {@value #VENTAS_MAXIMAS})
-     * @throws VentasInvalidasException si el monto está fuera del rango válido
+     * @throws VentasInvalidasException si el monto esta fuera del rango valido
      */
     public final void setTotalVentas(double totalVentas) throws VentasInvalidasException {
         if (totalVentas < 0 || totalVentas > VENTAS_MAXIMAS) {
             throw new VentasInvalidasException(
-                    "Monto de ventas inválido para empleado: " + getNombre(), totalVentas);
+                    "Monto de ventas invalido para empleado: " + getNombre(), totalVentas);
         }
         this.totalVentas = totalVentas;
     }
 
     /**
-     * Representación textual del empleado por comisión.
+     * Representacion textual del empleado por comision.
      *
-     * @return cadena con datos básicos, salario base, comisión y ventas
+     * @return cadena con datos basicos, salario base, comision y ventas
      */
     @Override
     public String toString() {
@@ -209,3 +209,4 @@ public class EmpleadoComision extends Empleado {
                 salarioBase, porcentajeComision * 100, totalVentas);
     }
 }
+

@@ -20,7 +20,7 @@ import org.junit.Test;
 /**
  * Pruebas unitarias para la capa de servicio y persistencia en memoria.
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  */
 public class NominaServicioTest {
@@ -109,3 +109,4 @@ public class NominaServicioTest {
         Assert.assertEquals(netoEsperado, totalNominaCalculado, 0.001);
     }
 }
+

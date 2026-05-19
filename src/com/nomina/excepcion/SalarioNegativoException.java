@@ -1,20 +1,20 @@
 package com.nomina.excepcion;
 
 /**
- * Excepción lanzada cuando el cálculo de un salario produce un valor negativo.
+ * Excepcion lanzada cuando el calculo de un salario produce un valor negativo.
  *
- * <p>Un salario negativo es un estado inválido en el sistema de nómina;
- * esta excepción permite identificar la causa específica del error.</p>
+ * <p>Un salario negativo es un estado invalido en el sistema de nomina;
+ * esta excepcion permite identificar la causa especifica del error.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  */
 public class SalarioNegativoException extends Exception {
 
-    /** Identificador de versión de serialización. */
+    /** Identificador de version de serializacion. */
     private static final long serialVersionUID = 1L;
 
-    /** Valor de salario que causó la excepción. */
+    /** Valor de salario que causo la excepcion. */
     private final double salarioCalculado;
 
     // ── Constructores ──────────────────────────────────────────────────────
@@ -22,7 +22,7 @@ public class SalarioNegativoException extends Exception {
     /**
      * Constructor con mensaje descriptivo.
      *
-     * @param mensaje descripción del error
+     * @param mensaje descripcion del error
      */
     public SalarioNegativoException(String mensaje) {
         super(mensaje);
@@ -30,9 +30,9 @@ public class SalarioNegativoException extends Exception {
     }
 
     /**
-     * Constructor con mensaje y valor de salario que originó el error.
+     * Constructor con mensaje y valor de salario que origino el error.
      *
-     * @param mensaje          descripción del error
+     * @param mensaje          descripcion del error
      * @param salarioCalculado valor negativo que fue calculado
      */
     public SalarioNegativoException(String mensaje, double salarioCalculado) {
@@ -41,10 +41,10 @@ public class SalarioNegativoException extends Exception {
     }
 
     /**
-     * Constructor con causa raíz.
+     * Constructor con causa raiz.
      *
-     * @param mensaje descripción del error
-     * @param causa   excepción que originó este error
+     * @param mensaje descripcion del error
+     * @param causa   excepcion que origino este error
      */
     public SalarioNegativoException(String mensaje, Throwable causa) {
         super(mensaje, causa);
@@ -54,7 +54,7 @@ public class SalarioNegativoException extends Exception {
     // ── Getter ─────────────────────────────────────────────────────────────
 
     /**
-     * Retorna el valor de salario negativo que desencadenó la excepción.
+     * Retorna el valor de salario negativo que desencadeno la excepcion.
      *
      * @return salario calculado (valor negativo)
      */
@@ -62,3 +62,4 @@ public class SalarioNegativoException extends Exception {
         return salarioCalculado;
     }
 }
+

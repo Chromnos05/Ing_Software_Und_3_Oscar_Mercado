@@ -4,16 +4,16 @@ import com.nomina.excepcion.SalarioNegativoException;
 import java.time.LocalDate;
 
 /**
- * Representa a un empleado temporal contratado por un período definido.
+ * Representa a un empleado temporal contratado por un periodo definido.
  *
- * <p>Recibe un pago diario fijo por los días efectivamente trabajados.
+ * <p>Recibe un pago diario fijo por los dias efectivamente trabajados.
  * Al ser temporal, no tiene derecho a prima de servicios ni a los
  * beneficios de largo plazo propios de los empleados indefinidos.</p>
  *
- * <p>Principio SRP: esta clase es responsable únicamente de modelar
- * la lógica salarial del empleado temporal.</p>
+ * <p>Principio SRP: esta clase es responsable unicamente de modelar
+ * la logica salarial del empleado temporal.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  * @see Empleado
  */
@@ -21,10 +21,10 @@ public class EmpleadoTemporal extends Empleado {
 
     // ── Constantes ─────────────────────────────────────────────────────────
 
-    /** Número máximo de días laborales en un mes (incluye posibles días extra). */
+    /** Numero maximo de dias laborales en un mes (incluye posibles dias extra). */
     public static final int DIAS_MAX_MENSUAL = 31;
 
-    /** Porcentaje de retención sobre el pago diario (retefuente simplificada 1 %). */
+    /** Porcentaje de retencion sobre el pago diario (retefuente simplificada 1 %). */
     private static final double PORCENTAJE_RETENCION = 0.01;
 
     /** Porcentaje de aporte a riesgos laborales ARL (0.522 %). */
@@ -32,13 +32,13 @@ public class EmpleadoTemporal extends Empleado {
 
     // ── Atributos privados ─────────────────────────────────────────────────
 
-    /** Tarifa de pago por día trabajado (≥ 0). */
+    /** Tarifa de pago por dia trabajado (≥ 0). */
     private double pagoDiario;
 
-    /** Número de días trabajados en el período (1 ≤ valor ≤ DIAS_MAX_MENSUAL). */
+    /** Numero de dias trabajados en el periodo (1 ≤ valor ≤ DIAS_MAX_MENSUAL). */
     private int diasTrabajados;
 
-    /** Fecha de finalización del contrato temporal. */
+    /** Fecha de finalizacion del contrato temporal. */
     private LocalDate fechaFinContrato;
 
     // ── Constructor ────────────────────────────────────────────────────────
@@ -46,13 +46,13 @@ public class EmpleadoTemporal extends Empleado {
     /**
      * Construye un empleado temporal.
      *
-     * @param id               identificador único
+     * @param id               identificador unico
      * @param nombre           nombre completo
      * @param fechaIngreso     fecha de inicio del contrato
-     * @param pagoDiario       tarifa de pago por día (≥ 0)
-     * @param diasTrabajados   días trabajados en el período (1 a {@value #DIAS_MAX_MENSUAL})
-     * @param fechaFinContrato fecha de finalización del contrato (posterior a fechaIngreso)
-     * @throws IllegalArgumentException si algún parámetro es inválido
+     * @param pagoDiario       tarifa de pago por dia (≥ 0)
+     * @param diasTrabajados   dias trabajados en el periodo (1 a {@value #DIAS_MAX_MENSUAL})
+     * @param fechaFinContrato fecha de finalizacion del contrato (posterior a fechaIngreso)
+     * @throws IllegalArgumentException si algun parametro es invalido
      */
     public EmpleadoTemporal(String id,
                             String nombre,
@@ -66,15 +66,15 @@ public class EmpleadoTemporal extends Empleado {
         setFechaFinContrato(fechaFinContrato, fechaIngreso);
     }
 
-    // ── Implementación de métodos abstractos ───────────────────────────────
+    // ── Implementacion de metodos abstractos ───────────────────────────────
 
     /**
      * {@inheritDoc}
      *
-     * <p>Fórmula: {@code salarioBruto = pagoDiario × diasTrabajados}</p>
+     * <p>Formula: {@code salarioBruto = pagoDiario × diasTrabajados}</p>
      *
-     * @return salario bruto según días trabajados
-     * @throws SalarioNegativoException si el resultado es negativo (no debería ocurrir)
+     * @return salario bruto segun dias trabajados
+     * @throws SalarioNegativoException si el resultado es negativo (no deberia ocurrir)
      */
     @Override
     public double calcularSalarioBruto() throws SalarioNegativoException {
@@ -101,7 +101,7 @@ public class EmpleadoTemporal extends Empleado {
     /**
      * {@inheritDoc}
      *
-     * <p>Deducciones: retención en la fuente ({@value #PORCENTAJE_RETENCION})
+     * <p>Deducciones: retencion en la fuente ({@value #PORCENTAJE_RETENCION})
      * + ARL ({@value #PORCENTAJE_ARL}) sobre el salario bruto.</p>
      *
      * @return total de deducciones aplicadas al empleado temporal
@@ -115,10 +115,10 @@ public class EmpleadoTemporal extends Empleado {
         }
     }
 
-    // ── Getters y Setters con validación ───────────────────────────────────
+    // ── Getters y Setters con validacion ───────────────────────────────────
 
     /**
-     * Retorna la tarifa de pago por día trabajado.
+     * Retorna la tarifa de pago por dia trabajado.
      *
      * @return pago diario
      */
@@ -127,7 +127,7 @@ public class EmpleadoTemporal extends Empleado {
     }
 
     /**
-     * Establece la tarifa de pago por día trabajado.
+     * Establece la tarifa de pago por dia trabajado.
      *
      * @param pagoDiario nueva tarifa diaria (≥ 0)
      * @throws IllegalArgumentException si el valor es negativo
@@ -141,31 +141,31 @@ public class EmpleadoTemporal extends Empleado {
     }
 
     /**
-     * Retorna los días trabajados en el período actual.
+     * Retorna los dias trabajados en el periodo actual.
      *
-     * @return días trabajados
+     * @return dias trabajados
      */
     public int getDiasTrabajados() {
         return diasTrabajados;
     }
 
     /**
-     * Establece los días trabajados en el período.
+     * Establece los dias trabajados en el periodo.
      *
-     * @param diasTrabajados días trabajados (1 ≤ valor ≤ {@value #DIAS_MAX_MENSUAL})
-     * @throws IllegalArgumentException si el valor está fuera del rango válido
+     * @param diasTrabajados dias trabajados (1 ≤ valor ≤ {@value #DIAS_MAX_MENSUAL})
+     * @throws IllegalArgumentException si el valor esta fuera del rango valido
      */
     public final void setDiasTrabajados(int diasTrabajados) {
         if (diasTrabajados < 1 || diasTrabajados > DIAS_MAX_MENSUAL) {
             throw new IllegalArgumentException(
-                    "Días trabajados inválidos (" + diasTrabajados + "). "
+                    "Dias trabajados invalidos (" + diasTrabajados + "). "
                     + "Rango permitido: 1 – " + DIAS_MAX_MENSUAL);
         }
         this.diasTrabajados = diasTrabajados;
     }
 
     /**
-     * Retorna la fecha de finalización del contrato temporal.
+     * Retorna la fecha de finalizacion del contrato temporal.
      *
      * @return fecha fin de contrato
      */
@@ -174,10 +174,10 @@ public class EmpleadoTemporal extends Empleado {
     }
 
     /**
-     * Establece la fecha de finalización del contrato.
+     * Establece la fecha de finalizacion del contrato.
      *
      * @param fechaFinContrato fecha de fin (no nula, posterior a fechaIngreso)
-     * @param fechaIngreso     fecha de inicio del contrato para validar orden cronológico
+     * @param fechaIngreso     fecha de inicio del contrato para validar orden cronologico
      * @throws IllegalArgumentException si la fecha fin es nula o anterior a la de ingreso
      */
     public final void setFechaFinContrato(LocalDate fechaFinContrato,
@@ -194,9 +194,9 @@ public class EmpleadoTemporal extends Empleado {
     }
 
     /**
-     * Representación textual del empleado temporal.
+     * Representacion textual del empleado temporal.
      *
-     * @return cadena con datos básicos, pago diario, días trabajados y fecha fin
+     * @return cadena con datos basicos, pago diario, dias trabajados y fecha fin
      */
     @Override
     public String toString() {
@@ -205,3 +205,4 @@ public class EmpleadoTemporal extends Empleado {
                 pagoDiario, diasTrabajados, fechaFinContrato);
     }
 }
+

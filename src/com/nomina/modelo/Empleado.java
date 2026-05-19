@@ -6,18 +6,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * Clase abstracta base del sistema de nómina que representa a un empleado genérico.
+ * Clase abstracta base del sistema de nomina que representa a un empleado generico.
  *
- * <p>Define la estructura común a todos los tipos de empleados: atributos de
- * identificación y fecha de ingreso, métodos abstractos de cálculo salarial
- * que cada subclase debe implementar, y un método concreto para calcular el
+ * <p>Define la estructura comun a todos los tipos de empleados: atributos de
+ * identificacion y fecha de ingreso, metodos abstractos de calculo salarial
+ * que cada subclase debe implementar, y un metodo concreto para calcular el
  * salario neto a partir de los valores calculados.</p>
  *
  * <p>Principio SRP: esta clase es responsable <em>exclusivamente</em> de modelar
- * la identidad y la lógica salarial base de un empleado. La persistencia, el
+ * la identidad y la logica salarial base de un empleado. La persistencia, el
  * formateo de reportes y otras responsabilidades recaen en clases separadas.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  * @see TipoEmpleado
  * @see com.nomina.excepcion.SalarioNegativoException
@@ -26,19 +26,19 @@ public abstract class Empleado {
 
     // ── Constantes ─────────────────────────────────────────────────────────
 
-    /** Formato de fecha usado en la representación textual. */
+    /** Formato de fecha usado en la representacion textual. */
     private static final DateTimeFormatter FORMATO_FECHA =
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     // ── Atributos privados ─────────────────────────────────────────────────
 
-    /** Identificador único del empleado. No puede ser nulo ni vacío. */
+    /** Identificador unico del empleado. No puede ser nulo ni vacio. */
     private String id;
 
-    /** Nombre completo del empleado. No puede ser nulo ni vacío. */
+    /** Nombre completo del empleado. No puede ser nulo ni vacio. */
     private String nombre;
 
-    /** Fecha en que el empleado ingresó a la empresa. No puede ser nula ni futura. */
+    /** Fecha en que el empleado ingreso a la empresa. No puede ser nula ni futura. */
     private LocalDate fechaIngreso;
 
     /** Tipo contractual del empleado. */
@@ -47,13 +47,13 @@ public abstract class Empleado {
     // ── Constructor ────────────────────────────────────────────────────────
 
     /**
-     * Construye un empleado con los datos básicos de identidad.
+     * Construye un empleado con los datos basicos de identidad.
      *
-     * @param id           identificador único (no nulo ni vacío)
-     * @param nombre       nombre completo (no nulo ni vacío)
+     * @param id           identificador unico (no nulo ni vacio)
+     * @param nombre       nombre completo (no nulo ni vacio)
      * @param fechaIngreso fecha de ingreso (no nula, no futura)
-     * @param tipoEmpleado tipo de contratación (no nulo)
-     * @throws IllegalArgumentException si alguno de los parámetros es inválido
+     * @param tipoEmpleado tipo de contratacion (no nulo)
+     * @throws IllegalArgumentException si alguno de los parametros es invalido
      */
     protected Empleado(String id,
                        String nombre,
@@ -65,16 +65,16 @@ public abstract class Empleado {
         setTipoEmpleado(tipoEmpleado);
     }
 
-    // ── Métodos abstractos ─────────────────────────────────────────────────
+    // ── Metodos abstractos ─────────────────────────────────────────────────
 
     /**
-     * Calcula el salario bruto del empleado según su modalidad de contratación.
+     * Calcula el salario bruto del empleado segun su modalidad de contratacion.
      *
-     * <p>El salario bruto es la remuneración antes de aplicar beneficios
+     * <p>El salario bruto es la remuneracion antes de aplicar beneficios
      * y deducciones.</p>
      *
      * @return salario bruto (valor ≥ 0)
-     * @throws SalarioNegativoException si el cálculo arroja un resultado negativo
+     * @throws SalarioNegativoException si el calculo arroja un resultado negativo
      */
     public abstract double calcularSalarioBruto() throws SalarioNegativoException;
 
@@ -82,7 +82,7 @@ public abstract class Empleado {
      * Calcula el total de beneficios adicionales al salario base.
      *
      * <p>Los beneficios incluyen bonos, auxilio de transporte, prima de
-     * servicios u otras compensaciones positivas según el tipo de empleado.</p>
+     * servicios u otras compensaciones positivas segun el tipo de empleado.</p>
      *
      * @return monto total de beneficios (valor ≥ 0)
      */
@@ -91,19 +91,19 @@ public abstract class Empleado {
     /**
      * Calcula el total de deducciones aplicables al salario del empleado.
      *
-     * <p>Las deducciones incluyen aportes a seguridad social, retención en la
-     * fuente, préstamos u otros descuentos según el tipo de empleado.</p>
+     * <p>Las deducciones incluyen aportes a seguridad social, retencion en la
+     * fuente, prestamos u otros descuentos segun el tipo de empleado.</p>
      *
      * @return monto total de deducciones (valor ≥ 0)
      */
     public abstract double calcularDeducciones();
 
-    // ── Método concreto de cálculo ─────────────────────────────────────────
+    // ── Metodo concreto de calculo ─────────────────────────────────────────
 
     /**
      * Calcula el salario neto del empleado.
      *
-     * <p>Fórmula: {@code salarioNeto = salarioBruto + beneficios - deducciones}</p>
+     * <p>Formula: {@code salarioNeto = salarioBruto + beneficios - deducciones}</p>
      *
      * @return salario neto del empleado
      * @throws SalarioNegativoException si el salario neto resultante es negativo
@@ -121,10 +121,10 @@ public abstract class Empleado {
         return neto;
     }
 
-    // ── Getters y Setters con validación ───────────────────────────────────
+    // ── Getters y Setters con validacion ───────────────────────────────────
 
     /**
-     * Retorna el identificador único del empleado.
+     * Retorna el identificador unico del empleado.
      *
      * @return id del empleado
      */
@@ -133,14 +133,14 @@ public abstract class Empleado {
     }
 
     /**
-     * Establece el identificador único del empleado.
+     * Establece el identificador unico del empleado.
      *
-     * @param id nuevo identificador (no nulo ni vacío)
-     * @throws IllegalArgumentException si el id es nulo o vacío
+     * @param id nuevo identificador (no nulo ni vacio)
+     * @throws IllegalArgumentException si el id es nulo o vacio
      */
     public final void setId(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("El ID del empleado no puede ser nulo ni vacío.");
+            throw new IllegalArgumentException("El ID del empleado no puede ser nulo ni vacio.");
         }
         this.id = id.trim();
     }
@@ -157,12 +157,12 @@ public abstract class Empleado {
     /**
      * Establece el nombre completo del empleado.
      *
-     * @param nombre nuevo nombre (no nulo ni vacío)
-     * @throws IllegalArgumentException si el nombre es nulo o vacío
+     * @param nombre nuevo nombre (no nulo ni vacio)
+     * @throws IllegalArgumentException si el nombre es nulo o vacio
      */
     public final void setNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre del empleado no puede ser nulo ni vacío.");
+            throw new IllegalArgumentException("El nombre del empleado no puede ser nulo ni vacio.");
         }
         this.nombre = nombre.trim();
     }
@@ -215,10 +215,10 @@ public abstract class Empleado {
         this.tipoEmpleado = tipoEmpleado;
     }
 
-    // ── Métodos de Object ──────────────────────────────────────────────────
+    // ── Metodos de Object ──────────────────────────────────────────────────
 
     /**
-     * Retorna una representación textual del empleado con sus datos principales.
+     * Retorna una representacion textual del empleado con sus datos principales.
      *
      * @return cadena con id, nombre, tipo y fecha de ingreso
      */
@@ -230,7 +230,7 @@ public abstract class Empleado {
     }
 
     /**
-     * Compara dos empleados por su identificador único.
+     * Compara dos empleados por su identificador unico.
      *
      * @param obj objeto a comparar
      * @return {@code true} si ambos empleados tienen el mismo id
@@ -244,7 +244,7 @@ public abstract class Empleado {
     }
 
     /**
-     * Retorna el hash code basado en el identificador único del empleado.
+     * Retorna el hash code basado en el identificador unico del empleado.
      *
      * @return hash code del empleado
      */
@@ -253,3 +253,4 @@ public abstract class Empleado {
         return Objects.hash(id);
     }
 }
+

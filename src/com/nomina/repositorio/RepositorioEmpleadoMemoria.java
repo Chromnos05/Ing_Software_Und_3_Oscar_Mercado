@@ -9,16 +9,16 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementación en memoria del repositorio de empleados.
+ * Implementacion en memoria del repositorio de empleados.
  *
- * <p>Utiliza un {@link LinkedHashMap} para mantener el orden de inserción
- * y garantizar acceso O(1) por id. Esta implementación es adecuada para
+ * <p>Utiliza un {@link LinkedHashMap} para mantener el orden de insercion
+ * y garantizar acceso O(1) por id. Esta implementacion es adecuada para
  * desarrollo, pruebas y sistemas de pequeña escala.</p>
  *
- * <p>Principio SRP: esta clase es responsable únicamente de la
+ * <p>Principio SRP: esta clase es responsable unicamente de la
  * persistencia temporal de empleados en memoria RAM.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  * @see RepositorioEmpleado
  */
@@ -30,7 +30,7 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
     // ── Constructor ────────────────────────────────────────────────────────
 
     /**
-     * Construye un repositorio en memoria vacío.
+     * Construye un repositorio en memoria vacio.
      */
     public RepositorioEmpleadoMemoria() {
         this.almacen = new LinkedHashMap<>();
@@ -67,7 +67,7 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
     /**
      * {@inheritDoc}
      *
-     * @return lista no modificable de todos los empleados en orden de inserción
+     * @return lista no modificable de todos los empleados en orden de insercion
      */
     @Override
     public List<Empleado> obtenerTodos() {
@@ -105,7 +105,7 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
     }
 
     /**
-     * Retorna una representación resumida del repositorio.
+     * Retorna una representacion resumida del repositorio.
      *
      * @return cadena con la cantidad de empleados almacenados
      */
@@ -114,3 +114,4 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
         return "RepositorioEmpleadoMemoria{empleados=" + almacen.size() + "}";
     }
 }
+

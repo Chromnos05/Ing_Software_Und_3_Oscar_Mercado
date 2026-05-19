@@ -14,11 +14,11 @@ import org.junit.Test;
 /**
  * Pruebas unitarias para las clases del modelo de empleados.
  *
- * <p>Valida los cálculos salariales brutos, netos, deducciones y beneficios
- * para los diferentes tipos de empleados, así como el comportamiento de las
+ * <p>Valida los calculos salariales brutos, netos, deducciones y beneficios
+ * para los diferentes tipos de empleados, asi como el comportamiento de las
  * excepciones personalizadas y las validaciones de atributos.</p>
  *
- * @author Sistema Nómina
+ * @author Sistema Nomina
  * @version 1.0
  */
 public class EmpleadoTest {
@@ -159,3 +159,4 @@ public class EmpleadoTest {
         new EmpleadoAsalariado("E105", "Ana", LocalDate.now().plusDays(1), 1_000_000.0);
     }
 }
+
