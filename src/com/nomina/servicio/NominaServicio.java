@@ -9,36 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Servicio de nomina que encapsula la logica de negocio relacionada
- * con el calculo y gestion de salarios de los empleados.
- *
- * <p>Actua como intermediario entre la capa de presentacion/control y la
- * capa de repositorio, orquestando las operaciones de calculo salarial
- * y aplicando reglas de negocio transversales.</p>
- *
- * <p>Principio SRP: esta clase es responsable unicamente de la logica
- * de negocio de la nomina. No persiste datos (eso lo hace el repositorio)
- * ni presenta resultados al usuario (eso lo hace la clase Main o un
- * controlador).</p>
- *
- * @author Sistema Nomina
- * @version 1.0
- * @see RepositorioEmpleado
- * @see Empleado
+ * Logica de negocio de la nomina.
+ * Coordina las operaciones entre el repositorio (datos)
+ * y los modelos (calculos). No guarda nada ni imprime nada.
  */
 public class NominaServicio {
 
-    /** Repositorio que provee el acceso a los datos de empleados. */
     private final RepositorioEmpleado<Empleado> repositorio;
 
-    // ── Constructor ────────────────────────────────────────────────────────
-
-    /**
-     * Construye el servicio de nomina con el repositorio indicado.
-     *
-     * @param repositorio repositorio de empleados (no nulo)
-     * @throws IllegalArgumentException si el repositorio es nulo
-     */
     public NominaServicio(RepositorioEmpleado<Empleado> repositorio) {
         if (repositorio == null) {
             throw new IllegalArgumentException("El repositorio no puede ser nulo.");
@@ -46,14 +24,8 @@ public class NominaServicio {
         this.repositorio = repositorio;
     }
 
-    // ── Gestion de empleados ───────────────────────────────────────────────
+    // ── Gestion de empleados ───────────────────────────────
 
-    /**
-     * Registra un nuevo empleado en el sistema.
-     *
-     * @param empleado empleado a registrar (no nulo)
-     * @throws IllegalArgumentException si ya existe un empleado con el mismo id
-     */
     public void registrarEmpleado(Empleado empleado) {
         if (empleado == null) {
             throw new IllegalArgumentException("El empleado a registrar no puede ser nulo.");
@@ -65,12 +37,6 @@ public class NominaServicio {
         repositorio.guardar(empleado);
     }
 
-    /**
-     * Actualiza los datos de un empleado existente.
-     *
-     * @param empleado empleado con datos actualizados (no nulo)
-     * @throws IllegalArgumentException si el empleado no existe en el sistema
-     */
     public void actualizarEmpleado(Empleado empleado) {
         if (empleado == null) {
             throw new IllegalArgumentException("El empleado a actualizar no puede ser nulo.");
@@ -82,54 +48,24 @@ public class NominaServicio {
         repositorio.guardar(empleado);
     }
 
-    /**
-     * Elimina un empleado del sistema por su id.
-     *
-     * @param id identificador del empleado a eliminar
-     * @return {@code true} si fue eliminado, {@code false} si no existia
-     */
     public boolean eliminarEmpleado(String id) {
         return repositorio.eliminar(id);
     }
 
-    /**
-     * Busca un empleado por su identificador unico.
-     *
-     * @param id identificador del empleado
-     * @return {@link Optional} con el empleado, o vacio si no existe
-     */
     public Optional<Empleado> buscarEmpleado(String id) {
         return repositorio.buscarPorId(id);
     }
 
-    /**
-     * Retorna la lista de todos los empleados registrados.
-     *
-     * @return lista de todos los empleados
-     */
     public List<Empleado> obtenerTodosLosEmpleados() {
         return repositorio.obtenerTodos();
     }
 
-    /**
-     * Retorna el total de empleados registrados en el sistema.
-     *
-     * @return cantidad de empleados
-     */
     public int contarEmpleados() {
         return repositorio.contarEmpleados();
     }
 
-    // ── Calculos de nomina ─────────────────────────────────────────────────
+    // ── Calculos de nomina ─────────────────────────────────
 
-    /**
-     * Calcula el salario neto de un empleado especifico.
-     *
-     * @param id identificador del empleado
-     * @return salario neto calculado
-     * @throws IllegalArgumentException si no existe el empleado con ese id
-     * @throws SalarioNegativoException si el calculo arroja un resultado negativo
-     */
     public double calcularSalarioNeto(String id) throws SalarioNegativoException {
         Empleado empleado = repositorio.buscarPorId(id)
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -138,12 +74,8 @@ public class NominaServicio {
     }
 
     /**
-     * Genera el resumen de nomina de un empleado especifico.
-     *
-     * @param id identificador del empleado
-     * @return objeto {@link ResumenNomina} con todos los valores calculados
-     * @throws IllegalArgumentException si no existe el empleado con ese id
-     * @throws SalarioNegativoException si algun calculo es negativo
+     * Arma el resumen completo de un empleado: sueldo bruto,
+     * beneficios, deducciones y el neto final.
      */
     public ResumenNomina generarResumenNomina(String id) throws SalarioNegativoException {
         Empleado empleado = repositorio.buscarPorId(id)
@@ -159,12 +91,8 @@ public class NominaServicio {
     }
 
     /**
-     * Genera los resumenes de nomina de todos los empleados registrados.
-     *
-     * <p>Los empleados que produzcan un error de calculo son omitidos y
-     * el error es registrado en la consola de error estandar.</p>
-     *
-     * @return lista de resumenes de nomina
+     * Genera la nomina de todos los empleados.
+     * Si alguien falla, lo salta y avisa por consola de errores.
      */
     public List<ResumenNomina> generarNominaCompleta() {
         List<ResumenNomina> nomina = new ArrayList<>();
@@ -179,23 +107,14 @@ public class NominaServicio {
         return nomina;
     }
 
-    /**
-     * Calcula el total de la nomina (suma de todos los salarios netos).
-     *
-     * @return suma total de salarios netos de todos los empleados
-     */
+    /** Suma de todos los sueldos netos de la empresa. */
     public double calcularTotalNomina() {
         return generarNominaCompleta().stream()
                 .mapToDouble(ResumenNomina::getSalarioNeto)
                 .sum();
     }
 
-    /**
-     * Filtra los empleados por tipo contractual.
-     *
-     * @param tipo tipo de empleado a filtrar
-     * @return lista de empleados que coinciden con el tipo indicado
-     */
+    /** Filtra empleados por tipo de contratacion. */
     public List<Empleado> filtrarPorTipo(TipoEmpleado tipo) {
         if (tipo == null) {
             throw new IllegalArgumentException("El tipo de empleado no puede ser nulo.");
@@ -209,4 +128,3 @@ public class NominaServicio {
         return resultado;
     }
 }
-

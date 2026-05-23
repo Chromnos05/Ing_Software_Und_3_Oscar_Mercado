@@ -9,42 +9,18 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementacion en memoria del repositorio de empleados.
- *
- * <p>Utiliza un {@link LinkedHashMap} para mantener el orden de insercion
- * y garantizar acceso O(1) por id. Esta implementacion es adecuada para
- * desarrollo, pruebas y sistemas de pequeña escala.</p>
- *
- * <p>Principio SRP: esta clase es responsable unicamente de la
- * persistencia temporal de empleados en memoria RAM.</p>
- *
- * @author Sistema Nomina
- * @version 1.0
- * @see RepositorioEmpleado
+ * Repositorio que guarda los empleados en memoria RAM.
+ * Usa LinkedHashMap para mantener el orden en que se fueron agregando
+ * y para buscar rapido por id. Sirve para desarollo y pruebas.
  */
 public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado> {
 
-    /** Mapa interno que almacena los empleados indexados por su id. */
     private final Map<String, Empleado> almacen;
 
-    // ── Constructor ────────────────────────────────────────────────────────
-
-    /**
-     * Construye un repositorio en memoria vacio.
-     */
     public RepositorioEmpleadoMemoria() {
         this.almacen = new LinkedHashMap<>();
     }
 
-    // ── Operaciones CRUD ───────────────────────────────────────────────────
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>Si el id ya existe, el empleado es reemplazado (update).</p>
-     *
-     * @throws IllegalArgumentException si el empleado es nulo
-     */
     @Override
     public void guardar(Empleado empleado) {
         if (empleado == null) {
@@ -53,9 +29,6 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
         almacen.put(empleado.getId(), empleado);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Optional<Empleado> buscarPorId(String id) {
         if (id == null || id.trim().isEmpty()) {
@@ -64,19 +37,11 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
         return Optional.ofNullable(almacen.get(id.trim()));
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return lista no modificable de todos los empleados en orden de insercion
-     */
     @Override
     public List<Empleado> obtenerTodos() {
         return Collections.unmodifiableList(new ArrayList<>(almacen.values()));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eliminar(String id) {
         if (id == null || id.trim().isEmpty()) {
@@ -85,9 +50,6 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
         return almacen.remove(id.trim()) != null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean existe(String id) {
         if (id == null || id.trim().isEmpty()) {
@@ -96,22 +58,13 @@ public class RepositorioEmpleadoMemoria implements RepositorioEmpleado<Empleado>
         return almacen.containsKey(id.trim());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int contarEmpleados() {
         return almacen.size();
     }
 
-    /**
-     * Retorna una representacion resumida del repositorio.
-     *
-     * @return cadena con la cantidad de empleados almacenados
-     */
     @Override
     public String toString() {
         return "RepositorioEmpleadoMemoria{empleados=" + almacen.size() + "}";
     }
 }
-
